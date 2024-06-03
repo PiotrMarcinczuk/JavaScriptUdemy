@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const arr = [12,20,22,51];
+        delete arr[1];
+        for(const v of arr){
+            console.log(v); // 12, undefined, 22, 51
+        }
+
+        for(const k in arr){ 
+            console.log(k); // 0, 1, 2, 3
+        }
+        console.log('--------------------------------');//-----------------------------------------;
+        const str = 'text';
+        for(const s of str) console.log(s);
+
+        for(const v in str) console.log(v);
+        console.log('--------------------------------');//-----------------------------------------;
+        
+        const obj = {
+            a: 1,
+            txt: 'srfsaddfdas',
+            print: function(){}
+        };
+
+        Object.defineProperty(obj, 'test', { //dodajemy do obiektu obj property 'test'
+            value: 45,
+            configurable: false, // czy mozna skasowac
+            writable: false, // czy mozna przypisac nowa wartosc
+            enumerable: false // czy mozna enumerowac
+        });
+        obj.test = 223;
+        console.log(obj.test);
+        
+        //for(const v of obj) console.log(v); // Uncaught TypeError: obj is not iterable
+        for(const k of Object.values(obj)) console.log(k); // 1, srfsaddfdas, f(){}
+        for(const k in obj) console.log(k); // uzyskamy wszystkie klucze a, txt, print
+        
+        console.log(obj.propertyIsEnumerable('txt'));
+
+
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+        function Transport(credentials){ // old interface
+            this.send = function(addr, wieght){
+                return wieght * 2;
+            }
+        }
+
+        let addr = { country: 'UK'};
+        let credentials = { token: 'user:zaq11'};
+        let oldTransport = new Transport(credentials);
+        let oldPrice = oldTransport.send(addr, 5);
+        console.log(oldPrice);
+
+        function NewTransport(){ // new interface
+            return {
+                login: function(credentials){ },
+                setPriority: function(priority){ },
+                setDestination: function(addr){ },
+                getPrice: function(wieght){
+                    return wieght * 2;
+                }
+            }
+        }
+
+        //adapter
+        function transportAdapter(credentials){
+            let shipping = new NewTransport();
+            shipping.login(credentials);
+
+            return{
+                send: function(addr, wieght){
+                    shipping.setPriority('normal');
+                    shipping.setDestination(addr);
+                    return shipping.getPrice(wieght);
+                }
+            }
+        }
+
+        let newTransport = transportAdapter(credentials);
+        let newPrice = newTransport.send(addr, 5);
+        console.log(newPrice);
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+    // Przy takim podejsciu wada jest fakt ze mamy zdublowane niektore wartosci
+    // Przy takim podejsciu funkcje najlepiej przypisywac do konstruktorow (a nie do proto)
+    // w tym wypadku np do Machine, zeby dziedziczace mogly z nich korzystac
+        function Machine(name, vendor, age){
+            this.name = name;
+            this.vendor = vendor;
+            this.age = age;
+            this.printInfo = function(){
+                console.log(this.name, this.vendor, this.age);
+            }
+        }
+
+        Machine.prototype.getVendor = function(){
+            return this.vendor;
+        }
+
+        function Vehicle(name, vendor, age, type, numWheels){
+            // Wywolanie konstruktora Machine na nowo
+            // tworzonym obiekcie kopiuje własciowsci czyli
+            // nie ma referencji !!!!!!
+            Machine.call(this, name, vendor, age);
+            //Machine.apply(this, [name, vendor, age]) // robi to samo 
+            this.type = type;
+            this.numWheels = numWheels;
+        }
+
+        // Dzieki takiemu podejsciu mozemy na car1 uzyc getVendor
+        Vehicle.prototype = new Machine();
+        console.log(Vehicle.prototype.constructor);
+        Vehicle.prototype.constructor = Vehicle;
+
+        let car1 = new Vehicle('raptor', 'ford', 11, 'truck', 4);
+        car1.printInfo();
+        console.log(car1.getVendor());
+
+        console.log(car1);
+
+        // Nie ma dostepu do getVendor
+        function Truck(name, vendor, type, numWheels, cargoType, weight){
+            Vehicle.call(this, name, vendor, type, numWheels);
+            this.cargoType = cargoType;
+            this.weight = weight;
+        }
+
+        let truck1 = new Truck('sznycor', 'BMW', 'sznyuceros', 8, 'piwo', 10000);
+        truck1.printInfo();
+        console.log(truck1);
+    </script>
+</body>
+</html>

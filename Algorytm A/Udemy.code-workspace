@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "C:/html css/calc"
+		},
+		{
+			"path": "../../przesylanie plikow node"
+		},
+		{
+			"path": "../../ExpressJS"
+		},
+		{
+			"path": "../../ExpressJS udemy"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Udemy"
+	}
+}

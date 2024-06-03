@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+        function Car(name){
+            this.name = name;
+        }
+
+        Car.prototype.brand = 'ford';
+        let mustang = new Car('mustang');
+        let f150 = new Car('f150');
+
+        Car.prototype.price = 120000;
+        console.log(mustang.price);
+        console.log(f150.price);
+
+        Car.prototype = { weight: 2000 }; // zmieniamy caly prototyp
+        let dodge = new Car('dodge');
+        console.log(dodge.brand); // undefined, dodge nie bedzie mial walsciwosci brand, poniewaz powstal po zmianie prototypu
+        console.log(mustang.brand); // mustang bedzie mial wlasciwosc brand poniewaz jest referencja do poprzedniego obiektu
+        
+        console.log('-----------------------') //---------------------
+
+        // nowo utworzony obiekt z prototypem { weight: 2000 }, nie zawiera poprzednich wlasciowsci
+        console.log(dodge);
+        console.log(dodge.price); // undefined
+        console.log(dodge.constructor); // Object() niepoprawna informacja
+        console.log(Car.prototype.constructor); // Object() niepoprawna informacja
+        Car.prototype.constructor = Car; // nadpisujemy aby informacjka byla prawidlowa
+        console.log(dodge.constructor);
+    </script>
+</body>
+</html>

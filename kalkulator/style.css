@@ -1,0 +1,35 @@
+#left-panel, #right-panel{
+    display: inline-block;
+    margin-top: 0.3rem;
+    vertical-align: top;
+}
+
+#out input{
+    width: 21rem;
+    height: 2rem;
+    font-size: 1.6rem;
+}
+
+button{
+    width: 4rem;
+    margin: 1px;
+    height: 4rem;
+    outline-width: 0;
+}
+
+button:hover{
+    border-color: gray;
+}
+
+button:active{
+    font-weight: bold;
+    background-color: silver;
+}
+
+.left-horiozn button, .right-horizon button{
+    display: inline-block;
+}
+
+#special-operator{
+    height: 8rem;
+}

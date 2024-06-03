@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+        let Shipping = function(){
+            this.company = '';
+        }
+
+        Shipping.prototype.setStrategy = function(company){
+            this.company = company;
+        }
+
+        Shipping.prototype.calculate = function(package){
+            return this.company.calculate(package);
+        }
+
+        function UPS(){
+            this.calculate = function(package){
+                return 25;
+            }
+        };
+
+        function DHL(){
+            this.calculate = function(package){
+                return 31;
+            }
+        };
+
+        let package = { from: 'PL', to: 'FR'};
+        let ups = new UPS();
+        let dhl = new DHL();
+
+        const shipping = new Shipping();
+        shipping.setStrategy(ups)
+        console.log(shipping.calculate(package));
+        shipping.setStrategy(dhl)
+        console.log(shipping.calculate(package));
+
+   </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+        function User(name, addr){
+            this.name = name;
+            this.addr = addr;
+        }
+
+        function decorateToEmployee(emp, data){
+            emp.copmany = (data.company || 'sznyc Industries');
+            emp.salary = (data.salary || 4790);
+            emp.tasks = [];
+            emp.addTask = function(task){
+                this.tasks.push(task);
+            }
+            emp.listTask = function(){
+                this.tasks.forEach( (el) => console.log(el));
+            }
+            return emp;
+        }
+
+        let user1 = new User('Karol', 'Warszawa');
+        let employee = decorateToEmployee(user1, {company: 'ubersznyc'});
+        employee.addTask('zad1');
+        employee.addTask('zad12');
+        employee.addTask( {e: 1, c: 3});
+        console.log(user1);
+        employee.listTask();
+
+        console.log('------------------------') // ----------------
+
+        function LaptopConfig(){
+            this.cost = 2000;
+            this.screenSize = 15;
+        }
+
+        //decorator 1
+        function increaseRam(comp){
+            let basicCost = comp.cost;
+            comp.cost += 500;
+        }
+
+        //decorator 2
+        function addInsurance(comp){
+            let basicCost = comp.cost;
+            comp.cost += basicCost * 0.1;
+        }
+
+        //decorator 3
+        function increaseScreenSize(comp, value){
+            let basicSize = comp.screenSize;
+            let demandSize = 0;
+            if(basicSize < 20) demandSize = basicSize + value;
+            if(demandSize >= 20) demandSize = 19;
+            let cost = (demandSize - basicSize) * 50;
+            comp.cost += cost;
+            comp.screenSize = demandSize;
+            
+        }
+
+        let laptop = new LaptopConfig(2000);
+        increaseRam(laptop);
+        console.log(laptop.cost);
+        addInsurance(laptop);
+        console.log(laptop.cost);
+        increaseScreenSize(laptop, 5);
+        console.log(laptop.cost);
+        console.log(laptop.screenSize);
+
+
+   </script>
+</body>
+</html>

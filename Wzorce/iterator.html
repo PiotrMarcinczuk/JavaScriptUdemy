@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+        const arr = ['kon', 'zebra', 'lew', 'slon', 'rekin'];
+        const arr1 = ['konfsd', 'zebfddwra', 'lee23w', 'sfsdlon', 'rertkin'];
+        function iterate(arr, callback, scope){
+            scope = scope || arr;
+            for(let index=0; index<arr.length; index++){
+                callback.call(scope, index, arr[index]) // scope = this
+            }
+        }
+
+        iterate(arr, function(index, element){
+            console.log('index: ' + index + ', element: ' + element);
+        })
+
+        console.log('------------------------') //--------------------
+
+        let Iterator = function(items){
+            this.index = 0;
+            this.items = items;
+        }
+
+        Iterator.prototype = {
+            first: function(){
+                this.reset;
+                return this.next();
+            },
+
+            next: function(){
+                return this.items[this.index++]
+            },
+
+            hasNext: function(){
+                return this.index <= this.items.length;
+            },
+
+            reset: function(){
+                this.index = 0
+            },
+
+            each: function(callback){
+                for(let i=this.first(); this.hasNext(); i=this.next()){
+                    callback(i);
+                }
+            }
+        }
+
+        let arr2 = ['gmc', 'ford', 'szzz', 'mercedes'];
+        let iter = new Iterator(arr2);
+        console.log(iter.first());
+        console.log(iter.next());
+        console.log(iter.hasNext());
+        console.log(iter.next());
+        iter.reset();
+        console.log(iter.next());
+        iter.each(function(item){
+            console.log(item + ' es');
+        });
+
+
+   </script>
+</body>
+</html>

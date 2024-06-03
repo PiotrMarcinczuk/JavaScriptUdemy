@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularz</title>
+    <link rel="stylesheet" href="./style.css" type="text/css">
+    <script src="./check_field.js" defer></script>
+    <script src="./validate_form.js" defer></script>
+    <script src="./validate.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <form autocomplete="off">
+            <label for="name">Podaj nazwę użytkownika</label>
+            <input type="text" id="name" name="name" value="np. username">
+            <p id="nameFail">Nazwa użytkownika musi mieć od 8 do 16 znaków</p>
+
+            <label for="email">Podaj email</label>
+            <input type="text" id="email" name="email" value="np. sznycer@wp.pl">
+            <p id="emailFail">Niepoprawny format email</p>
+
+            <label for="password">Podaj Hasło</label>
+            <input type="password" id="password" name="password">
+            <p id="passwordFail">
+                Hasło musi zawierać od 6 do 16 znaków, 
+                w tym conajmniej jedną wielką literę,
+                jedną małą literę, znak specjalny 
+                oraz liczbę
+            </p>
+
+            <label for="passwordRepeat">Powtórz hasło</label>
+            <input type="password" id="passwordRepeat" name="passwordRepeat">
+            <p id="passwordRepeatFail">
+                Podane hasło nie zgadza się z powyższym 
+                lub nie spełnia wymogu dotyczacych hasła
+            </p>
+
+            <input type="submit" value="Prześlij">
+        </form>
+    </main>
+</body>
+</html>

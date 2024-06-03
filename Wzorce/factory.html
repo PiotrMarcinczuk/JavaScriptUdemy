@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" defer></script>
+</head>
+<body>
+    <script>
+        function animalFactroy(name){
+            let randomId = Math.round( Math.random() * 1000 );
+            return {
+                name: name,
+                id: randomId,
+                info: function(){
+                    console.log("I'm animal, my id: " + this.id + " my name: " + this.name);
+                }
+            }
+        }
+        let animal = animalFactroy('kon');
+        animal.info();
+
+        console.log('------------------------------') // ----------------
+
+        function BasicUser( email, password){
+            this.email = email;
+            this.password = password;
+            this.rank = 'user';
+        }
+
+        function AdminUser(email, password, rank){
+            BasicUser.call(this, email, password);
+            this.rank = 'admin';
+        }
+
+        let UserFactory = {
+            getUser: function(email){
+                return new BasicUser(email, 'haslo1');
+            },
+
+            getAdmin: function(email, password){
+                return new AdminUser(email, password, 'admin');
+            }
+        }
+
+        let user1 = UserFactory.getUser('kamil@sznyc.com');
+        let user2 = UserFactory.getAdmin('Sznycer@sznyc.com', 'jan1');
+
+        console.log('-----------------------') // ------------------------------
+
+        // Factory method samo decyduje jaka instancje ma zwrocic
+        let Factory = {
+            getUser: function(rank){
+                let employee;
+                let email = rank + (Math.round(Math.random()*100))+'@example.com';
+                switch (rank){
+                    case 'user':
+                        employee = new BasicUser(email, 'fsd4rf');
+                    break;
+                    case 'admin':
+                        employee = new AdminUser(email,'dsdsg','admin');
+                    break;
+                }
+                employee.trainingRequired = true; 
+                return employee;
+            }
+        }
+
+        let user3 = Factory.getUser('user');
+        let admin3 = Factory.getUser('admin')
+
+        console.log('--------------------------') // --------------------------
+
+        function BikeFactory(name = 'bike'){
+            this.numWheels = 2;
+            this.name = name;
+            this.info = function(){
+                console.log('name: ', this.name);
+            }
+        }
+
+        function CarFactory(name = 'car'){
+            this.numWheels = 4;
+            this.name = name;
+            this.info = function(){
+                console.log('name: ', this.name);
+            }
+            return this;
+        }
+
+        function TruckFactory(name = 'truck', weight = 10000, fuelType = 'diesel'){
+            this.numWheels = 7;
+            this.name = name;
+            this.weight = weight;
+            this.fuelType = fuelType;
+            this.info = function(){
+                console.log('name: ', this.name);
+            }
+        }
+
+        function CreateBike(info, name){
+            return new  BikeFactory(info, name)
+        }
+
+        function CreateCar(info, name, weight){
+            return new CarFactory(info, name, weight)
+        }
+
+        function CreateTruck(info, name, weight, fuelType){
+            return new TruckFactory(info, name, weight, fuelType);
+        }
+
+        const  r1 = CreateBike('fajny rower','GX2');
+        console.log(r1);
+        r1.info();
+
+        const c1 = CreateCar('dobre auto', 'm3', 1849);
+        console.log(c1);
+        c1.info();
+
+        const t1 =  CreateTruck('masny g', 'laaaa', 10000, 'diesel');
+        console.log(t1);
+        t1.info();
+
+        console.log('-------------------------------------') // --------------------
+
+        let AbstractFactory = (function(){
+            let types = [];
+            console.log(types);
+            return {
+                registerType: function(type,factory){
+                    let v = factory();
+                    if(v.numWheels && v.name && v.info){
+                        types[type] = factory;
+                    }
+                },
+
+                getVehicle: function(type){
+                    let vehicleType = types[type];
+                    if(vehicleType) return vehicleType();
+                }
+            }
+        }) ();
+
+        let AF = AbstractFactory;
+        AF.registerType('car', CreateCar);
+        console.log(AF);
+        console.log(AF.getVehicle('car'));
+
+        AF.registerType('bike', CreateBike);
+        console.log(AF.getVehicle('bike'));
+
+        AF.registerType('truck', CreateTruck);
+        console.log(AF.getVehicle('truck'));
+
+        console.log('-------------------------------------') // ------------------
+
+        function Being(name, age){
+            this.name = name;
+            this.age = age;
+        }
+
+        Being.prototype.toString = function(){
+            console.log(this.name, this.age);
+        }
+        Human.prototype = new Being();
+        Human.prototype.constructor = Human;
+        Animal.prototype = new Being();
+        Animal.prototype.constructor = Animal;
+
+        function Human(name='human', age=0){
+            Being.call(this, name, age);
+            this.type = 'czlowiek';
+            this.employee = true;
+            this.isEmployee = function(){ return this.employee };
+        }
+
+        function HumanFactory(name='human', age=0){
+            return new Human(name,age);
+        }
+
+        function Animal(name, age, dangerLevel){
+            Being.call(this, name, age);
+            this.type = 'zwierze';
+            this.dangerLevel = dangerLevel;
+        }
+
+        function AnimalFactory(name='animal', age=0, dangerLevel='high'){
+            return new Animal(name, age, dangerLevel);
+        }
+
+        // let an1 = new Animal('kon', 22, 'low');
+        // an1.toString();
+        // console.log(an1);
+
+        // let h1 = new Human('karol', 21);
+        // h1.toString();
+        // console.log(h1);
+        // console.log(h1.isEmployee());
+
+        // Abstract factory
+        const Creator = (function(){
+            let types = [];
+            return{
+                registerBeing: function(animalType, factory){
+                    let v = factory();
+                    if(v.name && v.toString && v.type){
+                        types[animalType] = factory;
+                    }
+                },
+
+                getBeing: function(animalType){
+                    if(types[animalType]){
+                        return types[animalType]();
+                    }
+                }
+            }
+        }) ();
+
+        Creator.registerBeing('animal', () => AnimalFactory('kon',14,'low'));
+        console.log(Creator.getBeing('animal'));
+
+
+    </script>
+</body>
+</html>

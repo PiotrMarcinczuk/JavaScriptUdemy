@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+        const player = {
+            name: 'unknown',
+            login: function(){ console.log(this.name + ' zalogowany' ); },
+            logout: function(){ console.log(this.name); },
+            setName: function(name){ this.name = name},
+            printInfo: function(){ console.log(this.name, this.country, this.points ); }
+        };
+
+        // bot ma prototyp z obiektem player oraz
+        // dodane name i country jako wlasciowosci
+        let bot = Object.create(player, { // do obiektu bot jako prototyp bedzi przezkazany obiekt player
+            name: { value: 'cpu player 1' },
+            country: { value: 'n/a' }
+        });
+        bot.points = 10;
+
+        bot.login()
+        bot.printInfo();
+        bot.printInfo();
+        console.log(bot);
+    </script>
+</body>
+</html>

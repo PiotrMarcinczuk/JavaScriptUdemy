@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getJoke(){
+            return new Promise(function (resolve, reject){
+                const req = new XMLHttpRequest();
+                const apiURL = 'https://api.chucknorris.io/jokes/random';
+                req.open('GET', apiURL);
+                req.onload = function(){
+                    if (req.status == 200){
+                        resolve(req.response);
+                    }else{
+                        reject(req.responseText);
+                    }
+                }
+
+                req.onerror = function(){
+                    reject(new Error('Network error.'));
+                }
+
+                req.send();
+            });
+        }
+
+        getJoke()
+        .then(data => {
+            let json = JSON.parse(data);
+            console.log(json);
+        })
+
+        // Obydwa kody daja ten sam efekt-----------------------------------------------------------------
+
+        function proccesData(data){
+            console.log(data);
+        }
+
+        function error(err){
+            console.log(err);
+        }
+
+        async function getData(){ // jesli jest await musi byc async, ta funkcja zaczyna prace kiedy tylko bedzie gotowa i sie zaladuje
+            try {
+                const response = await fetch('https://api.chucknorris.io/jokes/random')
+                const data = await response.json();
+                console.log(data.value);
+            } catch(err){
+                console.log(err)
+            }
+        }
+        getData();
+
+        const obj = {
+            name: 'karol',
+            surname: 'sznycer',
+            age: 18,
+            des: {text: 'dasfsdfsd'},
+            job: 'sznycer'
+        };
+
+        console.log(Object.getOwnPropertyDescriptors(obj));
+        let str = 'Hie'.padStart(10, '0');
+        console.log(str);
+        let str2 = 'Hie'.padEnd(10, '0');
+        console.log(str2);
+    </script>
+</body>
+</html>

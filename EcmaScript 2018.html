@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        async function *getData(){
+            yield await Promise.resolve('ok 1');
+            yield await Promise.resolve('ok 2');
+            yield await Promise.resolve('ok 3');
+            yield await Promise.resolve('ok 4');
+        }
+
+        let dataIter = getData();
+        dataIter.next().then(a => console.log('ti',a.value));
+        dataIter.next().then(a => console.log('ti',a.value));
+        dataIter.next().then(a => console.log('ti',a.value));
+        dataIter.next().then(a => console.log('ti',a.value));
+        dataIter.next().then(a => console.log('ti',a.value));
+
+        async function testIter(){
+            let dataIter2 = getData();
+            for await(let value of dataIter2){
+                console.log(value);
+            }
+        }
+        testIter();
+
+
+        // rest
+        const foo = {
+            name: 'asas',
+            surname: 'dsadfs',
+            age: 22
+        };
+
+        const {name, ...data} = foo;
+        console.log(name);
+        console.log(data);
+
+        // spread
+        const bar = {
+            name: 'es',
+            age: 12,
+            a: 1,
+            b: 2
+        };
+
+        const obj = {
+            a: 10000, // jest nadpisywane przez spread a=1 z obiektu bar
+            ...bar,
+            c: 5432
+        };
+
+        console.log(obj);
+
+        function *genRandomId(){
+            while(true){ // nie zawiesi przegladarki poniewaz pobieramy wartosc tylko kiedy mamy next
+                let v = Math.trunc(Math.random() * 1000);
+                yield v;
+            }
+        }
+
+        const randomId = genRandomId();
+        console.log(randomId.next());
+        console.log(randomId.next());
+        console.log(randomId.next());
+        console.log(randomId.next());
+
+        console.log('----------------------------') //-----------------------
+
+        function *genRandomMaxId(){
+            while(true){
+                const maxValue = yield;
+                let v = Math.trunc(Math.random() * maxValue);
+                yield v;
+            }
+        }
+
+        const randomNumMaxIter = genRandomMaxId();
+        randomNumMaxIter.next(); // zatrzymujemy sie przed przypisaniem wartosci do max value
+        const random = randomNumMaxIter.next(150);
+        console.log('random: ', random);
+
+        const tab = Array.from(Array(10).keys());
+        for(let i=0; i<tab.length; i++){
+            if(randomNumMaxIter.next() !== undefined) tab[i] = randomNumMaxIter.next(50);
+        }
+        console.log(tab);
+        
+        // to samo co wyzej
+        console.log('--------------------') //------------------
+        tab.forEach(el => {
+            randomNumMaxIter.next();
+            const random1 = randomNumMaxIter.next(50);
+            randomNumMaxIter.next();
+        })
+        console.log(tab);
+    </script>
+</body>
+</html>

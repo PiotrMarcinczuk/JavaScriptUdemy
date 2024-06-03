@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" defer></script>
+</head>
+<body>
+    <script>
+        const rest = (a, b, ...params) => {
+            console.log(params); //operator rest zawsze musi być na końcu (ostatni argument) 
+        }
+        rest(1,2,3,4,5); 
+
+        const tab = [1,2,3,4,5,6];
+        function spread(a,b,c,d,e,f){
+            console.log(a,b,c,d,e,f); //rest zbiera nam wartosci a spread je rozbija
+        }
+        spread(...tab);
+
+        const tab2 = [1,2, ...tab, 4,5,6];
+        console.log(tab2);
+
+        const name = 'Karol';
+        const chars = [...name];
+        console.log(chars);
+
+        const basicObj = {
+            a: 'Ola',
+            b: 12
+        };
+
+        let secondObj = {
+            c: 12,
+            d: 22,
+            e: 33,
+            ...basicObj
+        };
+        console.log(secondObj);
+
+        const taskList = [
+            {name: 'task1', completed: false},
+            {name: 'task2', completed: true},
+            {name: 'task3', completed: true},
+            {name: 'task4', completed: false},
+        ]
+
+        const newList = [...taskList, {name: 'task5', completed: true}];
+        console.log(newList);
+    </script>
+</body>
+</html>

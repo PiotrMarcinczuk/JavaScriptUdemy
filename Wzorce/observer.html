@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+        function JobPortal(){
+            this.observers = [];
+            this.subscribe = function(observer){
+                if(!this.observers.includes(observer)){
+                    this.observers.push(observer);
+                }                    
+            }
+
+            this.unsubscribe = function(observer){
+                let index = this.observers.findIndex(
+                    el => el === observer
+                );
+                this.observers.splice(index, 1);
+            }
+
+            this.addNewOffer = function(offer){
+                this.observers.forEach(
+                    el => el.notify(offer)
+                );
+            }
+        }
+
+        function Candidate(name){
+            this.name = name;
+            this.notify = function(offer){
+                console.log(this.name, ' obserwuje ', offer);
+            }
+        }
+
+        jobPortal = new JobPortal();
+        let u1 = new Candidate('karol');
+        let u2 = new Candidate('jan');
+        jobPortal.subscribe(u1);
+        jobPortal.subscribe(u1);
+        jobPortal.subscribe(u1);
+        jobPortal.subscribe(u2);
+        jobPortal.unsubscribe(u2);
+        jobPortal.addNewOffer('sznycowaniue');
+   </script>
+</body>
+</html>

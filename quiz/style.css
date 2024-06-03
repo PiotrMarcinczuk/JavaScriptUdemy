@@ -1,0 +1,57 @@
+*{
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
+
+#quiz-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    background-color: red;
+    width: 20rem;
+    height: auto;
+}
+
+main{
+    width: 100%;
+    background-color: green;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+h1{
+    width: 100%;
+    text-align: center;
+}
+
+main input{
+    width: 25%;
+    height: 2em;
+}
+
+main label{
+    background-color: rebeccapurple;
+    width: 50%;
+    height: 25px;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+#quiz-box button{
+    font-size: 1.5rem;
+}
+#next-button{
+    margin-top: 8px;
+}
+
+#end-button{
+    margin-top: 8px;
+    display: none;
+    height: 2rem;
+}
+
+
+

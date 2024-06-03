@@ -1,0 +1,69 @@
+*{
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    color: black;
+}
+
+main{
+    width: 300px;
+    height: 500px;
+    background-color: lightgrey;
+    border: 1px solid grey;
+    display: flex;
+    justify-content: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+}
+
+label{
+    margin: 5px;
+}
+
+input{
+    width: 250px;
+    height: 30px;
+    margin: 5px;
+    color: gray;
+    outline: none;
+}
+
+p{
+    font-size: 12px;
+    height: 10px;
+    margin: 0px 0px 5px 5px;
+    display: inline;
+    color: red;
+}
+
+#nameFail{
+    display: none;
+}
+
+#emailFail{
+    display: none;
+}
+
+#passwordFail{
+    display: none;
+}
+
+#passwordRepeatFail{
+    display: none;
+}
+
+.failValidate{
+    border: 1px solid red;
+}
+
+.successValidate{
+    border: 1px solid green;
+}

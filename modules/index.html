@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module" src="test.js"></script>
+    <script type="module">
+        import * as myModule from "./test.js";
+        console.log(myModule);
+
+        console.log(myModule.testValue);
+        console.log(myModule.getData());
+        console.log(myModule.value); // nie mozemy tak wyciagac wartosci z domyslnego eksportu
+
+        console.log('-----------------------'); //--------------------------
+        
+        import {getData, testValue, add as addition} from "./test.js";
+        console.log(getData());
+        console.log(testValue);
+        console.log(addition(10,2)); // wywolujemy add z inna nazwa;
+
+        console.log('-----------------------'); //--------------------------
+
+        import myDefault from "./test.js";
+        console.log(myDefault);
+        console.log(myDefault.value);
+
+        console.log('-----------------------'); //--------------------------
+
+        import defaultExport, {multiply, testValue as testData} from "./test.js";
+        console.log(multiply(10,3));
+        console.log(testData);
+        myModule.setTestValue('se');
+        console.log(testData); 
+        console.log(testValue); 
+        
+        //https://caniuse.com/?search=modules
+    </script>
+</body>
+</html>

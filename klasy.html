@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //const car2 = new Car('MWW', 1999); // Dla klas hoisting nie dziala
+        //klasy zawsze w strict mode
+        class Car{
+            constructor(name, year){
+                this.name = name;
+                this.year = year;
+            }
+
+            print(){
+                console.log(this.name, this.year);
+            }
+        }
+
+        const car1 = new Car('BMW', 2012);
+        car1.print();
+
+        console.log('--------------------------------');//----------------------------------------------
+        
+        let Animal = class BasicAnimal{
+            constructor(name){
+                this.name = name;
+                this.age = 1;
+                if(Animal.count === undefined) Animal.count = 0;
+                Animal.count++;
+            }
+
+            getName = () => {
+                return this.name;
+            }
+
+            set age(value){
+                if(value > 0) this._age = value; // jesli bedzie this.age = value to w praktyce setter bedzie caly czas wywolywany = blad
+            }
+
+            get age(){
+                return this._age;
+            }
+
+            static getNewAnimal(){
+                return new Animal('Default animal');
+            }
+
+            static getAnimalCount(){
+                return Animal.count;
+            }
+        }
+
+        const animal1 = new Animal('Tiger');
+        console.log(animal1.getName());
+        console.log(Animal.name);
+        animal1.age = -32;
+        console.log(animal1.age);
+
+        const animal2 = Animal.getNewAnimal();
+        console.log(animal2.getName());
+        console.log(Animal.getAnimalCount());
+
+        console.dir(Animal);
+    </script>
+</body>
+</html>

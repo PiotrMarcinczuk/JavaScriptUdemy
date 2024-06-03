@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const user = {
+            name: 'karol',
+            age: 18,
+            city: 'elblag'
+        };
+
+        function upperCase(strings, ...rest){
+            let result = '';
+            for(let i=0; i<strings.length; i++){
+                result += strings[i];
+                if(i < rest.length){
+                    let temp = rest[i];
+                    if(typeof temp === 'string'){
+                        temp = temp.charAt(0).toUpperCase() + temp.slice(1);
+                    }
+                    result += temp;
+                } 
+            }
+            return result;
+        }
+
+        const txt = upperCase`
+            Hello ${user.name}, your age: ${user.age} and your city: ${user.city};
+        `;
+        console.log(txt);
+
+        const text = 'Hi sznycer';
+        console.log(text.includes('nyc')); // sprawdza czy lancuch zawiera dany fragment
+        console.log(text.startsWith('Hi')); // sprawdza czy rozpoczyna sie od danego fragmentu
+        console.log(text.startsWith('i s', 1)) // sprawdza od ktorego indeksu 
+        console.log(text.endsWith('er'));
+        console.log(text.endsWith('i', 2)); // ile znakow ma byc liczone od poczatku znaku
+
+    </script>
+</body>
+</html>

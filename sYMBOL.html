@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+        let symbol1 = Symbol('Symbol1');
+        let symbol2 = Symbol('Symbol1');
+
+        console.log(symbol1 == symbol2);
+        console.log(symbol1 === symbol2);
+
+        let obj = {
+            a: 10
+        };
+
+        obj[symbol1] = 1000;
+        console.log(obj[symbol1]);
+
+        for(const v in obj) console.log(v); // a Symbole sa nie iterowalne
+        console.log(Object.getOwnPropertySymbols(obj));
+    </script>
+</body>
+</html>

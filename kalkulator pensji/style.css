@@ -1,0 +1,46 @@
+*{
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
+nav{
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.3em;
+    margin-bottom: 2em;
+    background-color: red;
+}
+
+nav input{
+    font-size: 1em;
+}
+
+main{
+    display: flex;
+    justify-content: space-around;
+}
+
+main .employeeContributions, .employerContributions{
+    width: 45%;
+}
+
+main table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+main table td{
+    text-align: left;
+    padding: 8px;
+}
+
+.even-element{
+    background-color: white;
+}
+
+.not-even-element{
+    background-color: lightgray;
+}
+
+.special-style{
+    background-color: lightgreen;
+}

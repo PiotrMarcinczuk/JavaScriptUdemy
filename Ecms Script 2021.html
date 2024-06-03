@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // _ sa ignorowane 
+        let num = 10_000_000;
+        console.log(num);
+        let num2 = 10.232_3232_323;
+        console.log(num2);
+
+        console.log('----------------------------') //-------------------------
+
+        console.log('AAnia i Anna ze sznycem'.replaceAll('A', 'JD'));
+         
+        console.log('----------------------------') //-------------------------
+
+        // Weak reference (za czesto nie uzywac)
+        const objWeak = new WeakRef({
+            data: 10,
+            str: 'text'
+        });
+
+        console.log(objWeak.deref());
+        console.log(objWeak.deref().data);
+
+        console.log('----------------------------') //-------------------------
+
+        // Promise Any (jesli wszystkie promise zakonczyly sie powodzeniem to pierwszy jest zwracany, a jesli wszystkie rejected to dostajemy error)
+        const promises = [
+            Promise.resolve('ok'),
+            Promise.resolve('jeee'),
+            Promise.resolve('great')
+        ];
+
+        let result = Promise.any(promises)
+        .then(result => console.log(result))
+        .catch(err => console.log(err)); //ok
+
+        console.log('----------------------------') //-------------------------
+
+        // logical assigment operators
+        let a = 10;
+        let b = 15;
+        //if(a) a =  b;
+        a &&= b; //jesli a jest prawdziwe to do a przypiszemy b
+        console.log(a);
+
+        let c = null;
+        let d = 8;
+        if(!c) c = d;
+        c ||= d; // jesli c jest fallsy value to do c przypiszemy d
+        console.log(c);
+
+        let e = undefined;
+        let f = 33;
+        e ??= f; // jezeli e to null lub undefined do do e przypisujemy f
+        console.log(e);
+
+
+
+        
+
+    </script>
+</body>
+</html>

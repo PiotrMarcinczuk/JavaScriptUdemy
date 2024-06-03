@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Nie mozemy mieszac typow BigInt z innymi numerycznymi
+        let num = Number.MAX_SAFE_INTEGER;
+        console.log(num);
+
+        let newNum = 9007199254740995n //BigInt
+        let newNum2 = 90071992547409999n;
+        let num3 = newNum + newNum2;
+        console.log(num3);
+        console.log(num3 / 12345n);
+
+        console.log('-------------------------------') //-----------------------------
+
+        if(1 === 1){
+            import('./modules/test.js')
+            .then(obj => console.log(obj))
+            .catch(err => console.log(err));
+        }
+
+        async function load(){
+            let {add, multiply} = await import('./modules/test.js');
+            let result = add(2,10);
+            console.log(result);
+        }
+        load();
+
+        console.log('-------------------------------') //-----------------------------
+
+        // ?? nullish operator - null i undefined
+        const  x = null || 10; // 10 jako domyslna wartosc
+        console.log(x);
+        const str = '' || 'test' // pusty string to fallsy value
+        console.log(str);
+        
+        const y = null ?? 22; // jesli lewa strona nullish (null czy undefined) to 22
+        console.log(y);
+        const txt = '' ?? 'text'; // sprawdzamy czy jest null lub undefined(nie ma bo tu jest pusty string)
+        console.log(txt);
+
+        console.log('-------------------------------') //-----------------------------
+
+        // Optional chaining - za pomoca '?' sprawdzamy czy dana wlasciwosc lub obiekt etc. istnieje aby unkinac bledow
+        let o = {
+            a: 10,
+            b: 2,
+            object: {
+                str: 'text',
+                c: 55
+            }
+        };
+        console.log(o?.object?.str); // text
+        console.log(o?.object22?.str); // undefined
+    
+        console.log('-------------------------------') //-----------------------------
+
+        // Zbieranie wszystkich rezultatow promise za pomoca .allSettled
+        const promiseArr = [
+            Promise.resolve(20),
+            Promise.reject(null),
+            Promise.resolve({str: 'ok'}),
+            Promise.reject(new Error('ERROROSZNYC'))
+        ];
+
+        Promise.allSettled(promiseArr)
+        .then(results => {
+            console.log('All promises settled', results);
+            results.forEach(e => console.log(e.status, e.value));
+        });
+
+        console.log('-------------------------------') //-----------------------------
+
+        const str1 = 'Helli sznycerku Aniaku, Piotr, Karol, Ania';
+        const regexp = new RegExp('An[a-z]*', 'g');
+
+        let match;
+        while((match = regexp.exec(str1)) !== null){
+            console.log(match);
+        }
+
+        console.log('-------------------------------') //-----------------------------
+
+        console.log(globalThis === window);
+
+        console.log('-------------------------------') //-----------------------------
+
+        // module namespace export
+        /*
+        import * as utils from './modules/test.js';
+        export {utils};
+
+        export * as utils from './modules/test.js';
+
+        console.log('-------------------------------') //-----------------------------
+        */
+        
+        
+        
+    </script>
+</body>
+</html>

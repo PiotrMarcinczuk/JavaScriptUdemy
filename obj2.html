@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" defer></script>
+</head>
+<body>
+    <script>
+        // obj = {
+        //     a: 2,
+        //     b: 5,
+        //     c: 7,
+        // }
+
+        // const employee = {
+        //     name: 'Karol',
+        //     printInfo: function(surname, age){
+        //         console.log(this.name,surname,age);
+        //     }
+        // };
+        // const user = {
+        //     name: 'Adam',
+        //     job: 'sznyceter'
+        // }
+
+        // // Enumeracja klucz : wartosc w obiekcie
+        // const objKeys = Object.keys(obj)
+        // const objValues = Object.entries(obj);
+        // for(let [key,value] of objValues){
+        //     console.log('key:', key, 'value:',value);
+        // }
+
+        // // Dodawanie nowych kluczy do obiektu + ich wlasciwosci 
+        // Object.defineProperty(obj, 'sznyc', {
+        //     value: 'test',
+        //     writable: true,
+        //     configurable: false,
+        //     enumerable: true
+        // });
+        // console.log(obj);
+
+        // // Używanie metod innych obiektów na innych obiektach lub w przypadku bind() stałe przypisanie
+        // employee.printInfo.call(user, 'Adamski', 'Elbing');
+        // employee.printInfo.apply(user, ['Adamski','Gdansk']);
+        // let result = employee.printInfo.bind(user, 'sZAŁŁ', 'Krakow');
+        // result();
+        // result();
+        
+        // // Prywatyzacja zwracanych danych
+        // function test(){
+        //     let privateData = 'hi';
+        //     function showPriv(){
+        //         console.log(privateData);
+        //     }
+        //     function setData(value){
+        //         privateData = value;
+        //     }
+        //     return {
+        //         show: showPriv,
+        //         setData: setData
+        //     }
+        // }
+        // const obj = test();
+        // console.log(obj)
+        // obj.show();
+
+        // // Zapamietana referencja a nie wartosc
+        // for(var i=0; i<3; i++){
+        //     setTimeout( function(){
+        //         console.log(i);
+        //     },500);
+        // }
+
+
+
+    </script>
+</body>
+</html>

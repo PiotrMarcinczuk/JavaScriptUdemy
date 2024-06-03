@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+        const tab1 = [1,2,3,4,5];
+        for(let v of tab1){
+            console.log(v); 
+        }
+
+        console.log('--------------------------------');//----------------------------------------------
+        
+        const str = 'text';
+        for(let v of str){
+            console.log(v);
+        }
+        
+        console.log('--------------------------------');//----------------------------------------------
+        
+        const map1 = new Map();
+        map1.set('test', {id: 1, content: 'text'});
+        const car = {car: 'GMC'};
+        map1.set(car, {topSpeed: 200});
+        console.log(map1.get('test')); // {id: 1, content: 'text'}
+        console.log(map1.get(car)); // {topSpeed: 200}
+    
+        for(let entry of map1){
+            console.log(entry); // ['test', {…}] , [{…}, {…}]
+        }
+
+        for(const[key, value] of map1){
+            console.log(key, value); // test {id: 1, content: 'text'} , {car: 'GMC'} {topSpeed: 200}
+        }
+
+        console.log('--------------------------------');//----------------------------------------------
+        
+        const set = new Set([1,1,1,2,2,2,3,4]); // Tylko unikalne wartosci
+        for(const v of set){
+            console.log(v); // 1, 2, 3, 4
+        }
+       
+        console.log('--------------------------------');//----------------------------------------------
+        
+        const elements = document.querySelectorAll('div');
+        for(let v of elements){
+            v.innerHTML = 'sznyc';
+        }
+        console.log('--------------------------------');//----------------------------------------------
+    </script>
+</body>
+</html>

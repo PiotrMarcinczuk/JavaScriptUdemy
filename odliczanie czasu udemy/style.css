@@ -1,0 +1,21 @@
+#date-div{
+    display: flex;
+    justify-content: center;
+}
+
+#messege{
+    position: relative;
+    left: 40%;
+    display: none;
+}
+
+main{
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 25px 0 25px;
+    padding: 0 25px 0 25px;
+    font-size: 1.5em;
+}

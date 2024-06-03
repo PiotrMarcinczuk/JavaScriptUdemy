@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+        function User(name){
+            this.name = name;
+            this.chatroom = null;
+        }
+
+        User.prototype.send = function(msg, to){
+            if(this.chatroom) this.chatroom.send(msg, this, to);
+        }
+
+        User.prototype.recive = function(msg, from){
+            console.log('from: ', from.name, ' to user: ', this.name, ' msg: ', msg);
+        }
+
+        let chat = function(){
+            let users = {};
+            return {
+                register: function(user){
+                    if(!users[user.name]){
+                        users[user.name] = user;
+                        user.chatroom = this;
+                    }
+                },
+
+                send: function(msg, from, to){
+                    if(to){
+                        to.recive(msg, from);
+                    }else{
+                        for( key in users ){
+                            if(users[key] !== from) users[key].recive(msg, from);
+                        }
+                    }
+                }
+            }
+        }
+
+        const chatTest = chat();
+        let u1 = new User('Karol'); chatTest.register(u1);
+        let u2 = new User('Magda'); chatTest.register(u2);
+        let u3 = new User('sZNYC'); chatTest.register(u3);
+        chatTest.send('fsdfsd',u2);
+        u1.send('fds')
+
+        
+   </script>
+</body>
+</html>

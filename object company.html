@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!-- w kalkulatorze bug gdy 5.435454 +- 5 != 0.435  -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+    <P>lotem sznycu</P>
+    <input type="text">
+    <div></div>
+    <script>
+        var company = {
+            name: 'sZNYCERO',
+            address: {
+                city: 'Olsztyn',
+                street: 'Gałczynskiego',
+            },
+            employees: [],
+
+            addEmployee: function(email, job, salary){
+                if(typeof email !== 'string' || typeof job !== 'string'){
+                    return false;
+                }
+                if(email.indexOf('@') < 0 || salary < 4000){
+                    return false;
+                }
+                var employe = {
+                    email: email,
+                    job: job,
+                    salary: salary,
+                    getInfo: function(){
+                        return `${this.email} - ${this.job}, pensja: ${this.salary}`;
+                    }
+                }
+                this.employees.push(employe);
+                return true;
+            },
+
+            showEmployees: function(){
+                console.log('Pracownicy firmy ' + this.name);
+                for(let i=0; i<this.employees.length; i++){
+                    const x = this.employees[i];
+                    console.log(x.getInfo());
+                }
+            },
+
+            changeSalaries: function(percentChange){
+                for(let i=0; i<this.employees.length; i++){
+                    this.employees[i].salary += this.employees[i].salary * percentChange/100;
+                }
+                
+
+            }
+        }
+        company.addEmployee('piotr@sznycer.pl','sznycprogramer',4000);
+        company.addEmployee('karol@sz.pl','albanczyk',4555);
+        company.showEmployees();
+        company.changeSalaries(10);
+        company.showEmployees();
+    </script>
+</body>
+</html>

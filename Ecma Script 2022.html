@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Nie musimy juz emulowac prywatnych pol za pomoca _
+        class Car {
+            constructor(){
+                this.name = 'Mustang';
+                this.brand = 'Ford';
+                this.onClick = this.#clicked
+            }
+
+            static PI = 3.14
+            static #TEST = 'txt'
+
+            // public instance field
+            color = 'red'
+            topSpeed = 250
+
+            // private instance field
+            #currentPrice = 120000;
+
+            printInfo = () => {
+                console.log('Current Price: ', this.#currentPrice);
+                console.log('Current test: ', Car.#TEST);
+            }
+
+            #clicked = () => {
+                console.log('car clicked', this.name);
+            }
+
+            static getNewCar(){
+                return new Car();
+            }
+        }
+
+        let car =  new Car();
+        console.log(car.color);
+        // console.log(car.#currentPrice); Nie mozemy  z zewnatrz do prywatnego
+        car.printInfo();
+        car.onClick();
+        setTimeout(car.onClick, 10);
+        console.log(Car.PI);
+        console.log(Car.getNewCar());
+    </script>
+    <script type="module">
+        // top level await
+        const response = await fetch('https://api.chucknorris.io/jokes/random');
+        const data = await response.json();
+        console.log(data);
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+        function CreditRequest(data){
+            this.data = data;
+        }
+
+        function BackgroundCheck(creditRequest, amount){
+            this.check = function(){
+                //sprawdzenie creditRequest
+                if(amount < 30000){
+                    return true;
+                }return false;
+            }
+        }
+
+        function RiskCheck(creditRequest, amount){
+            this.check = function(){
+                if(amount > 2500){
+                    return true;
+                }return false;
+            }
+        }
+
+        CreditRequest.prototype.appylFor = function(amount){
+            let result = 'approved';
+            let riskCheck = new RiskCheck(this.data, amount);
+            let backgroundCheck = new BackgroundCheck(this.data, amount);
+
+            if(!riskCheck.check() || !backgroundCheck.check()) result = 'not approved';
+            return result;
+        }
+        const person = { name: 'Karol', slary: 500, documents: [] };
+        let creditRequest = new CreditRequest(person);
+        console.log(creditRequest.appylFor(25000));
+    </script>
+</body>
+</html>

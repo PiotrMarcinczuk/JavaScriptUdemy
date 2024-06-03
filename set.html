@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const set1 = new Set();
+        set1.add(2);
+        set1.add(NaN);
+        set1.add({a: 10});
+        set1.add('text');
+        set1.add(2);
+
+        set1.delete(NaN);
+
+        //set1.clear(); // kasuje wszystko
+        console.log(set1.size);
+        console.log(set1.has(NaN));
+
+        for(const v of set1) console.log(v);
+        
+        console.log('--------------------------------')//----------------------------------------------
+
+        const arr = Array.from(set1);
+        console.log(arr); 
+
+        const arr2 = [...set1];
+        console.log(arr2);
+
+        const set2 = new Set([...set1, 2, 5, 5, 6]);
+        console.log(set2);
+    </script>
+</body>
+</html>

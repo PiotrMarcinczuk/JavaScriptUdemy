@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="./style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&family=Roboto:wght@300&display=swap" rel="stylesheet">
+        <script src="./script.js" defer></script>
+        <title>QuizSznyc</title>
+    </head>
+    <body>
+        <div id="quiz-box">
+            <main>
+                <h1></h1>
+                <input type="checkbox" id="answer1" name="answer1" value="answer1">
+                <label for="answer1" id="answer1"></label>
+                <input type="checkbox" id="answer2" name="answer2" value="answer2">
+                <label for="answer2" id="answer2"></label>
+                <input type="checkbox" id="answer3" name="answer3" value="answer3">
+                <label for="answer3" id="answer3"></label>
+                <p id="message"></p>
+            </main>
+            <button id="next-button">Next</button>
+            <button id="end-button" onclick="quiz.showResult()">Pokaż wynik</button>
+        </div>
+    </body>
+</html>

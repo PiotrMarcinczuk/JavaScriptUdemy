@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let obj = {
+            a: 10,
+            b: 20,
+            c: 35
+        };
+
+        const handler = {
+            get(target, prop, receiver){
+                if(prop === 'c') return 'C!!!';
+                return target[prop] + '!';
+            },
+
+            set(target, prop, value){
+                if(Number.isInteger(value)){
+                    target[prop] = value;
+                }else{
+                    console.log('wrong data');
+                }
+            }
+        }
+
+        const proxy1 = new Proxy(obj, handler);
+        console.log(proxy1.a);
+        console.log(proxy1.b);
+        console.log(Reflect.get(proxy1, 'b'));
+        console.log(Reflect.get(proxy1, 'c'));
+
+        Reflect.set(proxy1, 'b', 55);
+        console.log(proxy1.b);
+        proxy1.a = 111;
+        console.log(proxy1.a);
+    </script>
+</body>
+</html>

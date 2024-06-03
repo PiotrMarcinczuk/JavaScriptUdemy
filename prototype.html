@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+        function Thing(name){
+            this.name = name;
+        }
+
+        Thing.prototype.year = 2000;
+        Thing.prototype.print = function(){
+            console.log(this.name, this.year);
+        }
+
+        let telephone = new Thing('phone');
+        telephone.print();
+        console.log(telephone.hasOwnProperty('name'));
+
+        let tv = new Thing('tv');
+        tv.print();
+
+        Thing.prototype.data  = { str: 'text' };
+        Thing.prototype.weight = 50;
+
+        Thing.prototype.printWeight = function(){
+            console.log(this.weight);
+        };
+
+        // Obie instancje telephone i tv maja dostep do tych samych pol
+        console.log(telephone.weight);
+        console.log(tv.weight);
+
+        console.log(telephone.data.str);
+        console.log(tv.data.str);
+
+        // pola oraz metody z prototype nie sa kopiami w nowych obiektach, to referencja
+        console.log(telephone.data === tv.data); // true
+        console.log(telephone.weight === tv.weight); // true
+
+        telephone.weight = 3; // przeslaniamy weight z prototypu wartoscia bezposrednia
+        console.log(telephone.weight);
+
+        delete telephone.weight; // kasowanie wlasciowosci
+        console.log('ponownie z proto: ', telephone.weight); // ponownie 50 z prototypu
+
+        telephone.weight = 4;
+
+        tv.printWeight();
+        telephone.printWeight();
+
+        // listowanie wlasciowosci tylko obiektu tak powinno wygladac
+        for(prop in telephone){
+            if( telephone.hasOwnProperty(prop) ){
+                console.log(prop);
+            }
+        }
+
+        // listowanie dla obiektu i dla prototypu
+        for(prop in telephone){
+            console.log(prop);
+        }
+    </script>
+</body>
+</html>

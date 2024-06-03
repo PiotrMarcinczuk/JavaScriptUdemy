@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Animal{
+            constructor(name){
+                this.name = name;
+
+                if(Animal.count === undefined) Animal.count = 0;
+                this.id = Animal.count;
+                Animal.count++;
+
+                this._type = 'animal';
+            }
+
+            set type(str){
+                if(typeof str === 'string') this._type = str;
+            }
+
+            get type(){
+                return this._type;
+            }
+
+            printName(){
+                console.log('Animal: ', this.name);
+            }
+        }
+
+        class Human extends Animal {
+            constructor(name, city){
+                super(name);
+                this.city = city
+            }
+
+            #job = 'proggramer';
+
+            printName(){
+                super.printName(); // odwolujemy sie takze do tej metody z klasy nadrzednej
+                console.log('Human: ', this.name, ', City: ', this.city, ', Job: ', this.#job);
+            }
+        }
+
+        const animal1 = new Animal('Tiger');
+        const human1 = new Human('Olek','Paslek');
+        human1.printName();
+        console.log(Animal.count);
+    </script>
+</body>
+</html>

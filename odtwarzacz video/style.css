@@ -1,0 +1,26 @@
+#video-container{
+    width: 100%;
+    display: flex;
+}
+
+#video{
+    width: 70%;
+    height: 90%;
+}
+
+#options{
+    display: flex;
+    justify-content: center;
+}
+
+button{
+    margin: 10px;
+}
+
+input{
+    margin: 10px;
+}
+
+span{
+    margin: 10px;
+}

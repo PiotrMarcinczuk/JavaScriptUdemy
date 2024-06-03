@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr = [1,2,3,4,5,6];
+        arr.forEach( x => console.log(x));
+
+        const arr2 = arr.map( x => x*3);
+        console.log(arr2);
+
+        const arr3 = arr2.filter(x => x > 10)
+        console.log(arr3);
+
+        const arrResult = arr.reduce( (acc, curr) => acc+curr);
+        console.log(arrResult);
+
+        const found = arr.find( el => el > 4);
+        console.log(found);
+
+        const foundIndex = arr.findIndex(el => el > 4);
+        console.log(foundIndex);
+
+        const result = arr.reduce((acc, cur) => {
+            if(cur > 4){
+                return acc + cur;
+            }else{
+                return acc;
+            }
+        },0)
+        console.log(result);
+
+        const numbers = [2,5,7,9,12,15];
+        const info = numbers.every(el => el > 5); // zwraca true jesli wszystkie spelniaja warunek
+        console.log(info);
+
+        const atLeastOne = numbers.some(el => el > 4); // zwraca true jesli chociaz jeden element spelnia warunek
+        console.log(atLeastOne);
+
+        const arr4 = [1,4,7,8,9];
+        console.log(arr4.includes(3));
+
+        console.log('Hi siemanko'.includes('Hi')); 
+
+
+
+        
+
+    </script>
+</body>
+</html>

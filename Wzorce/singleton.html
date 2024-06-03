@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" defer></script>
+</head>
+<body>
+    <script>
+        let Singleton = (function(){
+            let instance = null;
+            let privLanguage = 'en';
+
+            function Config(){
+                this.getLanguage = function(){ return privLanguage; }
+                this.setLanguage = function(lang){ privLanguage = lang; } 
+            }
+
+            return {
+                getInstance: function(){
+                    if(!instance){
+                        instance = new Config();
+                    }
+                    return instance;
+                }
+            }
+        }) ();
+
+        let obj = Singleton.getInstance().getLanguage();
+        console.log(obj);
+
+        let obj1 = Singleton.getInstance();
+        obj1.setLanguage('pl');
+        console.log(obj1.getLanguage());
+
+        let obj2 = Singleton.getInstance();
+        console.log(obj2.getLanguage()); // Bedzie dalej pl, bo odwolujemy sie tylko do jednej i tej samej instancji
+
+        console.log('------------------------') //-------------------------------
+
+        let Logger = (function(){
+            let instance = null;
+            let logData = [];
+            function logMsg(str){
+                logData.push( { msg: str, date: new Date() });
+            }
+
+            function initLoger(){
+                function getLogLen(){ return logData.length; }
+                return { log: logMsg, getLogLen: getLogLen}
+            }
+
+            console.log(logData);
+            return {
+                getInstance: function(){
+                    if(!instance){
+                        instance = initLoger();
+                    }
+                    return instance;
+                }
+            }
+        }) ();
+
+        const logger = Logger.getInstance();
+        logger.log('msg1');
+        logger.log('msg2');
+        console.log(logger.getLogLen());
+
+        console.log('-----------------------------') // ------------------------
+
+        class DBConnection {
+            constructor(dbName = 'defaultDB'){
+                if(DBConnection.exists){
+                    console.log('jest');
+                    return DBConnection.instance
+                }
+                DBConnection.exists = true;
+                DBConnection.instance = this;
+                this.dbName = dbName;
+
+                return this;
+            }
+
+            getFromDB(recordId){
+                return { id: recordId, data: '...', dbName: this.dbName };
+            }
+
+            closeConn(){
+                if(DBConnection.exists === true) DBConnection.exists = false;
+            }
+
+            checkConn(){
+                return DBConnection.exists ? 'yes' : 'no';
+            }
+        }
+
+        const newConn = new DBConnection('sznycbaza');
+        console.log(newConn.getFromDB(3));
+        console.log(newConn.checkConn());
+        newConn.closeConn();
+        console.log(newConn.checkConn());
+        const Sznycconnect = new DBConnection();
+        console.log(newConn.checkConn()); // yes bo do tej samej instancji
+        console.log(Sznycconnect.checkConn()); // yes bo do tej samej instancji
+        console.log(Sznycconnect.getFromDB(34));
+
+        
+
+    </script>
+</body>
+</html>

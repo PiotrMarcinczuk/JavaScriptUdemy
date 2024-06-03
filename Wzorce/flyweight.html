@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+        function Flyweight(brand, cpu, ram){
+            this.brand = brand;
+            this.cpu = cpu; 
+            this.ram = ram;
+        }
+
+        function Computer(brand, cpu, speed, ram, modelId){
+            this.flyweight = FlyweightFactroy.get(brand, cpu, ram);
+            this.speed = speed;
+            this.modelId = modelId;
+        }
+
+        const FlyweightFactroy = (function(){
+            let flyweights = {};
+            return {
+                get: function(brand, cpu, ram){
+                    let propName = `${brand}_${cpu}_${ram}`;
+                    if(!flyweights[propName]){
+                        flyweights[propName] = new Flyweight(brand, cpu, ram);
+                    }
+                    return flyweights[propName];
+                },
+
+                count: function(){
+                    let count = 0;
+                    for(let le in flyweights){
+                        count++;
+                    }
+                    return count;
+                }
+            }
+        }) ();
+
+        let arr = [];
+        arr.push( new Computer('Dell', 'Intel', '3Ghz', '16gb', 'XYZ1'));
+        arr.push( new Computer('Dell', 'Intel', '5Ghz', '8gb', 'XKZZ1'));
+        arr.push( new Computer('Dell', 'Intel', '2Ghz', '16gb', 'Z1'));
+        arr.push( new Computer('Asus', 'AMD', '3Ghz', '16gb', 'AMF2XX'));
+        arr.push( new Computer('Asus', 'AMD', '4.2Ghz', '16gb', 'AMXT2'));
+
+        console.log(FlyweightFactroy.count());
+   </script>
+</body>
+</html>

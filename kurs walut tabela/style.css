@@ -1,0 +1,31 @@
+main{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    flex-direction: column;
+}
+
+#currency-table{
+    width: 60%;
+    height: auto;
+    background-color: lightgray;
+    display: flex;
+    padding: 20px;
+}
+
+#currency-table table{
+    width: 100%;
+    text-align: left;
+}
+
+#currency-table table{
+    font-size: 1.3em;
+}
+
+#currency-table table tr{
+    padding: 50px 0;
+}
+
+#currency-table table tr:not(:first-child):hover{
+    color: lightcoral;
+}

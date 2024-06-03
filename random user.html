@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <title>Sznyc</title>
+        <meta charset="utf-8">
+    </head>
+    <style>
+        .user-profiles{
+            background-color: green;
+            height: 15rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        h2{
+            margin-top: 15rem;
+            text-align: center;
+        }
+        .description{
+            padding: 1em;
+            font-size: 1.2rem;
+        }
+        .column{
+            margin-right: 1rem;
+        }
+        .column img{
+            border-radius: 5em;
+        }
+        .row div{
+            margin-right: 1rem;
+
+        }
+    </style>
+    <body>
+        <h2>Random user</h2>
+        <div class="user-profiles">  
+            <div class="column">
+                <img id="avatar" src="" alt="">
+            </div>
+            <div class="description">
+                <div id="full-name">full</div>
+                <div id="username">username</div>
+                <div id="user-details">
+                    <div id="email">email
+                </div>
+                    <div id="country">country
+                </div>
+            </div>
+
+            </div>
+            
+            
+                
+            
+        </div>
+        <main>
+            <script>
+                window.onload = function(){
+                    fetch('https://randomuser.me/api')
+                    .then(response => response.json())
+                    .then(data => dataReady(data))
+                }
+
+                function dataReady(data){ 
+                    console.log(data);
+                    var result = data.results[0];
+                    var fullName = result.name.title + ' ' 
+                                   + result.name.first + ' ' 
+                                   + result.name.last;
+                    var img = result.picture.large;
+                    var username = result.login.username;
+                    var email = result.email;
+                    var country = result.location.country;
+                    document.getElementById("full-name").innerHTML = fullName;
+                    document.getElementById("username").innerHTML = username;
+                    document.getElementById("email").innerHTML = email;
+                    document.getElementById("country").innerHTML = country;
+                    document.getElementById("avatar").src = img;
+
+
+
+                }
+
+            </script>
+        </main>
+    </body>
+</html>

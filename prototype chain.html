@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+       function thing(){
+
+       }
+       thing.prototype; // kazda funkcja ma wlasciwosc np prototype
+       thing.call(); // jest tez dostrep do innych funkcji np calle etc.
+       thing.apply();
+       thing.toString();
+       console.log(thing.prototype);
+
+       console.log('---------------------') // ---------------------------
+
+       function Thing(name){
+           this.name = name; 
+       }
+
+       Thing.prototype.year = 2000;
+       Thing.prototype.pirntInfo = function(){
+           console.log(this.name, this.year);
+       }
+
+       let telephone = new Thing('phone');
+       telephone.pirntInfo();
+
+       let tv = new Thing('tv');
+       tv.pirntInfo();
+
+       console.log('---------------------') // ---------------------------
+
+       Thing.prototype.data = { str: 'text' };
+       Thing.prototype.weight = 50;
+
+       // Obie instancje telephone i tv maja dostep do tych samych pol zdefiniowanych wyzej
+       console.log(telephone.weight);
+       console.log(tv.weight);
+
+       console.log(telephone.data.str);
+       console.log(tv.data.str);
+
+       console.log(telephone.data === tv.data);
+
+       console.log('---------------------') // ---------------------------
+
+       // Wlasciwosc prototype jest dostepna wlacznie dla funkcji 
+       // konstruujacych obiekt
+       // wraz z new, czyli dla konstruktorow
+       function Some(name){
+           this.name = name;
+       }
+
+       let item = new Some('table');
+       Some.prototype.price = 600;
+       console.log(item.constructor.prototype.price); // 600
+       console.log(item.__proto__.price); // odwolanie po __proto__ nie zalecane
+       console.log(item.constructor.prototype === item.__proto__); // true
+
+       // Listowanie wlasciwosci obiektu:
+
+       for(prop in item){ // wypisuje tez z proto
+           console.log(prop); 
+       }
+
+       for(prop in item){
+        if(item.hasOwnProperty(prop)){
+            console.log(prop);
+        }
+       }
+
+       console.log('--------------------') // ---------------------------
+
+       function Car(name){
+           this.name = name;
+       }
+
+       Car.prototype.brand = 'ford';
+       let mustang = new Car('mustang');
+       let f150 = new Car('f150');
+
+       Car.prototype.price = 120500;
+       console.log(mustang.price);
+       console.log(f150.price);
+
+       Car.prototype = { weight: 2000 };
+       let dodge = new Car('viper');
+       console.log(dodge.brand); // undefined
+       console.log(dodge.weight);
+       console.log(f150.price);
+
+       Car.prototype.constructor = Car; // nadpisujemy
+
+       console.log('-------------------------') // -----------------------
+
+       // Wlasne lanuchy prototypow
+       function Figure(){
+           this.name = 'geometric figure';
+           this.toString = function(){
+            console.log(this.name);
+           }
+       }
+
+       function Figure2d(){
+           this.name = '2d figure';
+       }
+
+       function Rect(x, y, sideLength){
+           this.x = x;
+           this.y = y;
+           this.sideLength = sideLength;
+           this.name = 'rect'
+       }
+
+       // Zamiast dodawac poszczegolne pola mozna nadpisac prototyp czyms nowym
+       // Musimy naprawic info o konstruktorze
+       Figure2d.prototype = new Figure(); 
+       Rect.prototype = new Figure2d();
+
+       let rect = new Rect(5,4,20);
+       
+       Figure2d.prototype.constructor = Figure2d;
+       Rect.prototype.constructor = Rect;
+
+       rect.toString();
+
+       // instanceof sprawdza czy rect jest instancja wszystkich 3 konstruktorow
+       console.log(rect instanceof Figure); // true
+       console.log(rect instanceof Figure2d); // true
+       console.log(rect instanceof Rect); // true
+
+       console.log(Figure2d.prototype.isPrototypeOf(rect)); // true
+
+       console.log('----------------') // ---------------------
+
+       function Triangle(side1, side2, side3, height){
+           this.side1 = side1; this.side2 = side2; this.side3 = side3; this.height = height;
+           this.toString = function(){
+               if(typeof this.side1 !== 'number' || typeof this.side2 !== 'number' || typeof this.side3 !== 'number'){
+                   console.log('Wrong data types')
+               }else{
+                   console.log('Suma wszystkich bokow: ', this.side1 + this.side2 + this.side3);
+               }
+           } 
+           this.height = height;
+       }
+
+       function isoscelesTraingle(side1, side2){
+           this.side1 = side1; this.side2 = side1; this.side3 = side2;
+       }
+
+       function equaliteralTriangle(side){
+           this.side1 = side; this.side2 = side; this.side3 = side;
+       }
+
+       isoscelesTraingle.prototype = new Triangle();
+       equaliteralTriangle.prototype = new isoscelesTraingle();
+
+       isoscelesTraingle.prototype.constructor = isoscelesTraingle;
+       equaliteralTriangle.prototype.constructor = equaliteralTriangle;
+
+       let tr = new equaliteralTriangle(5);
+       tr.toString();
+       console.log(tr);
+
+       let tr2 = new isoscelesTraingle(5,2);
+       tr2.toString();
+       console.log(tr2);
+
+       for(prop in tr){
+           console.log(prop);
+       }
+
+    </script>
+</body>
+</html>

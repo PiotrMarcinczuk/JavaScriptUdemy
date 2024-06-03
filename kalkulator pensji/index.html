@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <title>Kalkulator pensji</title>
+</head>
+<body>
+    <nav>
+        Kwota brutto: <input type="text" id="value">
+    </nav>
+    <main>
+        <div class="employeeContributions">
+            <p>Składki pracownika: </p>
+            <br>
+            <table>
+                <tr class="special-style">
+                    <th>#</th> 
+                    <th>Nazwa składki</th> 
+                    <th>Kwota</th> 
+                </tr>
+                <tr>
+                    <td class="number"></td>
+                    <td>składka emerytalna 9.76%</td>
+                    <td class="retirmentContribution"></td>
+                </tr>
+                <tr>
+                    <td class="number"></td>
+                    <td>składka rentowa 1.5%</td>
+                    <td class="pensionContribution"></td>
+                </tr>
+                <tr>
+                    <td class="number"></td>
+                    <td>składka chorobowa 2.45%</td>
+                    <td class="sicknessContribution"></td>
+                </tr>
+                <tr>
+                    <td class="number"></td>
+                    <td>Suma składek na ubezpieczenie społeczne finansowane przez pracownika:</td>
+                    <td class="workerSocialContributionSum"></td>
+                </tr>
+                <tr>
+                    <td class="number"></td>
+                    <td>Podstawa wymiaru składki na ubezpieczenie zdrowotne</td>
+                    <td class="baseForHealthContribution"></td>
+                </tr>
+                <tr>
+                    <td class="number"></td>
+                    <td>składka na ubezpiecznie zdrowotne 9%</td>
+                    <td class="healthInsurance"></td>
+                </tr>
+                <tr>
+                    <td class="number"></td>
+                    <td>Zaliczka na podatek</td>
+                    <td class="advanceTax"></td>
+                </tr>
+                <tr>
+                    <td class="number"></td>
+                    <td>Składka zdrowotna 7.75%</td>
+                    <td class="healthContribution"></td>
+                </tr>
+                <tr class="special-style">
+                    <td class="number"></td>
+                    <td>Kwota netto: </td>
+                    <td class="finalEmployeeMoney"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="employerContributions">
+            <p>Składki pracodawcy: </p>
+            <br>
+            <table>
+                <tr class="special-style">
+                    <th>#</th>
+                    <th>Nazwa składki</th>
+                    <th>Kwota</th>
+                </tr>
+                <tr>
+                    <td class="number"></td>
+                    <td>Składka na ubezpieczenie emerytalne 9.76%</td>
+                    <td class="employerRetirmentContribution"></td>
+                </tr>
+                <tr>
+                    <td class="number"></td>
+                    <td>Składka na ubezpieczenie rentowe 6.5%</td>
+                    <td class="employerPensionContribution"></td>
+                </tr>
+                <tr>
+                    <td class="number"></td>
+                    <td>Składka na ubezpieczenie wypadkowe 1.67%</td>
+                    <td class="employerAccidentInsurance"></td>
+                </tr>
+                <tr>
+                    <td class="number"></td>
+                    <td>Składka na fundusz pracy 2.45%</td>
+                    <td class="employerWorkFundContribution"></td>
+                </tr>
+                <tr>
+                    <td class="number"></td>
+                    <td>Składka na Fundusz Gwarantowanych Świadczeń Pracowniczych 0.1%</td>
+                    <td class="employerGuarantedWorkFundContribution"></td>
+                </tr>
+                <tr class="special-style">
+                    <td class="number"></td>
+                    <td>Suma składek pracodawcy</td>
+                    <td class="finalEmployerMoney"></td>
+                </tr>
+            </table>
+        </div>
+    </main>
+    <script src="./set_index_and_styles.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>

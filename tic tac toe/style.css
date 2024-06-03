@@ -1,0 +1,39 @@
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(3,1fr);
+    grid-gap: 5px;
+    width: 380px;
+}
+
+h1{
+    text-align: center;
+}
+
+.cell{
+    text-align: center;
+    font-size: 7rem;
+    width: 120px;
+    height: 120px;
+    border: 1px solid black;
+}
+
+.cell:hover{
+    cursor: pointer;
+}
+
+button{
+    margin-top: 15px;
+    font-size: 1.4em;
+}
+
+button:hover{
+    cursor: pointer;
+}

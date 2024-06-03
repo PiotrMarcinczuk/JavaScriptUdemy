@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const map1 = new Map();
+        map1.set('a1', 1);
+        map1.set(10, {test: 'ter', value: 2});
+
+        console.log(map1.get(10));
+        console.log(map1.size);
+
+        map1.delete(10);
+        console.log(map1.has(10));
+        console.log(map1.get(10));
+
+        map1.set(NaN, 99); // zly wybor, ale przydatna wiedza NaN jako key
+
+        console.log('--------------------------------')//----------------------------------------------
+        
+        const apple = {value: 22};
+        map1.set(apple, {name: 'apple'});
+        console.log(map1.get(apple));
+
+        console.log(map1.has(apple));
+
+        const iterator1 = map1.entries();
+        console.log(iterator1.next()); // {value: Array(2), done: false}
+        let result = iterator1.next();
+        
+        while(!result.done){
+            console.log(result.value);
+            result = iterator1.next();
+        }
+
+        for(const [key, value] of map1){
+            console.log('map1: ' + key + ' ' + value);
+        }
+
+        console.log('--------------------------------')//----------------------------------------------
+
+        const map2 = new Map([['key1', 8], ['key2', 5]]);
+        map2.forEach(function(key, value){
+            console.log(key, value);
+        });
+
+        console.log('--------------------------------')//----------------------------------------------
+
+        const map3 = new Map([...map1, ...map2]);
+        map3.forEach(function(key, value){
+            console.log(key, value);
+        });
+    </script>
+</body>
+</html>

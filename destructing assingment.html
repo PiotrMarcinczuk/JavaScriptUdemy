@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" defer></script>
+</head>
+<body>
+    <script>
+        // przy destrykturyzacji obiektu nazwy zmiennych musza sie zgadzac np. city
+        //----------------------------------------------
+        const [num, name, obj] = [12, 'Ania', {a:1,b:2}];
+        console.log(num,name,obj);
+
+        const {username, age, place = 'Warszawa'} = {username: 'Ola', age: 21};
+        console.log(username,age,place);
+
+        const [f, ,h] = [9,10,11];
+        console.log(f,h);
+        //----------------------------------------------
+        function getUserData(){
+            const city = 'krakow';
+            const street = 'sznyciowa'
+            return {
+                city,
+                street
+            }
+        }
+        const {city} = getUserData();
+        console.log(city);
+        
+        //----------------------------------------------
+        const userDeatils = {
+            surname: 'Snzycer',
+            salary: 5500
+        };
+
+        function printUser({surname}){
+            console.log(surname);
+        }
+        printUser(userDeatils);
+        //----------------------------------------------
+        const employee = {
+            name: 'Karol',
+            id: 33,
+            employment: {
+                company: 'sznyc.com',
+                address: {
+                    country: 'Poland',
+                }
+            }
+        };
+
+        const {id, employment:{company}} = employee; //destruktur przy zaglebionych obiektach
+        console.log(id,company);
+
+        const {employment: {address: {street: companyStreet= 'Wilcza'}}} = employee;
+        console.log(companyStreet);
+        //----------------------------------------------
+    </script>
+</body>
+</html>

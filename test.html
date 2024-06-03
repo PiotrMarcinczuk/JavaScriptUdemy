@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <form name="userForm">
+            Name: <input type="text" name="name"><br>
+            Age: <input type="number" name="age"><br>
+            School: <input type="text" name="school"><br>
+            <input type="submit" value="Send">
+        </form>
+    </div>
+    <div id="content">
+    <p></p>
+    </div>
+    <script>
+        const content = document.getElementById('content');
+        const output = document.querySelector('p');
+        const form = document.querySelector('form');
+
+        form.addEventListener('submit', (event) =>{
+            event.preventDefault(); // zapobiega domyslnej akcji formularza, czyli wyslaniu i przeladowaniu strony
+            let name = form.name.value;
+            let age = form.age.value;
+            let school = form.school.value;
+            if(name !== '' && age !== '' && school !== ''){
+                let newStudent = new Student(name, age, school);
+                newStudent.print();
+                newStudent.addToPage();
+            }
+        })
+
+        class Student {
+            constructor(studentName, studentAge, studentSchool){
+                this.studentName = studentName;
+                this.studentAge = studentAge;
+                this.studentSchool = studentSchool;
+            }
+
+            print = function(){
+                console.log("Name: ", this.studentName);
+                console.log("Age: ", this.studentAge);
+                console.log("School : ", this.studentSchool);
+            }
+
+            addToPage = function(){
+                output.innerHTML = `Imie studenta: ${this.studentName}, Wiek studenta: ${this.studentAge}, Szkoła: ${this.studentSchool}`;
+
+            }
+        }
+    </script>
+</body>
+</html>
